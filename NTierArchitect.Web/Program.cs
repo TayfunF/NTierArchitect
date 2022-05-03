@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using NTierArchitect.Core.Repositories;
+using NTierArchitect.Core.Services;
 using NTierArchitect.Core.UnitOfWorks;
 using NTierArchitect.Repository;
 using NTierArchitect.Repository.Repositories;
 using NTierArchitect.Repository.UnitOfWorks;
+using NTierArchitect.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(
             options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection").UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 
 
 
