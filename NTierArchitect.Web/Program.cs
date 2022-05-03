@@ -5,6 +5,7 @@ using NTierArchitect.Core.UnitOfWorks;
 using NTierArchitect.Repository;
 using NTierArchitect.Repository.Repositories;
 using NTierArchitect.Repository.UnitOfWorks;
+using NTierArchitect.Service.Mapping;
 using NTierArchitect.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
 
 
