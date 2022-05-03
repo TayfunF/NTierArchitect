@@ -34,7 +34,7 @@ namespace NTierArchitect.Repository.Repositories
             return await DbSet.AnyAsync(expression);
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> expression)
+        public IQueryable<T> GetAll()
         {
             return DbSet.AsNoTracking().AsQueryable();
         }
