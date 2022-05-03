@@ -1,7 +1,21 @@
+using Microsoft.EntityFrameworkCore;
+using NTierArchitect.Core.Repositories;
+using NTierArchitect.Core.UnitOfWorks;
+using NTierArchitect.Repository;
+using NTierArchitect.Repository.Repositories;
+using NTierArchitect.Repository.UnitOfWorks;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<AppDbContext>(
+            options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection").UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
 
 var app = builder.Build();
 
